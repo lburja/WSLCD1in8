@@ -380,7 +380,7 @@ namespace LCD1IN8{
             }
         }
 
-        //% block="draw $this(bitmap) at x $x y $y with color $fgColor and background $bgColor"
+        //% block="draw $this(bitmap) at x $xi y $yi with color $fgColor and background $bgColor"
         //% inlineInputMode=inline
         //% group="Bitmap: Display"
         //% xi.defl = 0
@@ -405,7 +405,7 @@ namespace LCD1IN8{
         } 
     }
 
-    //% block="create bitmap with width $w heigth $h and pixel size $dot"
+    //% block="create bitmap with width %w heigth %h and pixel size %dot"
     //% w.defl = 160
     //% w.min=1 w.max=160
     //% h.defl = 128
