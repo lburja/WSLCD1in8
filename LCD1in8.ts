@@ -314,6 +314,7 @@ namespace LCD1IN8{
         //% block="fill bitmap $this(bitmap) with $bit"
         //% bit.min=0 bit.max=1
         //% bit.defl=0
+        //% group="Bitmap: Modify"
         public fill(bit: number) {
             if (bit == 0) {
                 this._buf.fill(0)
@@ -398,7 +399,7 @@ namespace LCD1IN8{
         //% inlineInputMode=inline
         //% group="Bitmap: Display"
         //% fgColor.defl=LCD_COLOR.RED
-        public showBitmapOnLCD(fgColor: number) {
+        public showBitmapOnLCD(fgColor: number = LCD_COLOR.RED) {
             for (let y = 0; y < this.getRows(); y++) {
                 for(let x = 0; x < this.getCols(); x++){
                     let bit = this.getBit(x, y)
