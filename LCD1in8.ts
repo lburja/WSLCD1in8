@@ -284,7 +284,7 @@ namespace LCD1IN8{
         _dot: DOT_PIXEL
         _f: number
 
-        constructor(dot: DOT_PIXEL = DOT_PIXEL.DOT_PIXEL_1) {
+        constructor(dot: DOT_PIXEL) {
             this._dot = dot
 
             if (this._dot == DOT_PIXEL.DOT_PIXEL_2) {
@@ -318,10 +318,11 @@ namespace LCD1IN8{
         //% y.min=0 y.max=128
         //% bit.min=0 bit.max=1
         //% bit.defl=1
+        //% weight=70
         public setBit(x: number, y:number, bit:number) {
-            if (x < 0 || x >= this._cols || y < 0 || y >= this._rows){
-                return
-            }  
+            // circular
+            x = x % this._cols
+            y = y % this._rows  
 
             let pos = (y * this._cols) + x
             let byteOffset = Math.floor(pos / 8)
@@ -341,10 +342,11 @@ namespace LCD1IN8{
         //% block="$this(bitmap) get value at $x $y"
         //% inlineInputMode=inline
         //% group="Bitmap: Read"
+        //% weight=85
         public getBit(x: number, y:number): number {
-            if (x < 0 || x >= this._cols || y < 0 || y >= this._rows){
-                return 0
-            }
+            // circular
+            x = x % this._cols
+            y = y % this._rows 
 
             let pos2 = (y * this._cols) + x
             let byteOffset2 = Math.floor(pos2 / 8)
@@ -357,12 +359,14 @@ namespace LCD1IN8{
 
         //% block="$this(bitmap) number of rows"
         //% group="Bitmap: Read"
+        //% weight=80
         public getRows() {
             return this._rows
         }
 
         //% block="$this(bitmap) number of cols"
         //% group="Bitmap: Read"
+        //% weight=75
         public getCols() {
             return this._cols
         }
@@ -370,6 +374,7 @@ namespace LCD1IN8{
         //% block="show bitmap $this(bitmap) on leds"
         //% inlineInputMode=inline
         //% group="Bitmap: Display"
+        //% weight=65
         public showBitmapOnLeds() {
             basic.clearScreen()
 
@@ -386,6 +391,7 @@ namespace LCD1IN8{
         //% block="draw bitmap $this(bitmap) using color $fgColor"
         //% inlineInputMode=inline
         //% group="Bitmap: Display"
+        //% weight=60
         public showBitmapOnLCD(fgColor: number) {
             for (let y = 0; y < this.getRows(); y++) {
                 for(let x = 0; x < this.getCols(); x++){
@@ -399,10 +405,11 @@ namespace LCD1IN8{
     }
 
     //% block="create bitmap with pixel size $dot"
-    //% dot.defl=DOT_PIXEL.DOT_PIXEL_2
+    //% dot.defl=DOT_PIXEL.DOT_PIXEL_4
     //% group="Bitmap: Create"
     //% blockSetVariable=bitmap
-    export function createBitmap(dot: DOT_PIXEL = DOT_PIXEL.DOT_PIXEL_2): Bitmap {
+    //% weight=90
+    export function createBitmap(dot: DOT_PIXEL = DOT_PIXEL.DOT_PIXEL_4): Bitmap {
         return new Bitmap(dot)
     }
 }
