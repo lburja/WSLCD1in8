@@ -317,12 +317,12 @@ namespace LCD1IN8{
         //% bit.defl=1
         public setBit(x: number, y:number, bit:number) {
             // circular
-            x = x % this._cols
-            y = y % this._rows  
+            // x = x % this._cols
+            // y = y % this._rows  
 
             let pos = (y * this._cols) + x
-            let byteOffset = Math.floor(pos / 8)
-            let bitOffset = pos % 8
+            let byteOffset = pos >> 3 // Math.floor(pos / 8)
+            let bitOffset = pos & 7 // pos % 8
 
             let byte = this._buf.getNumber(NumberFormat.UInt8LE, byteOffset)
 
@@ -340,12 +340,12 @@ namespace LCD1IN8{
         //% group="Bitmap: Read"
         public getBit(x: number, y:number): number {
             // circular
-            x = x % this._cols
-            y = y % this._rows 
+            // x = x % this._cols
+            // y = y % this._rows 
 
             let pos2 = (y * this._cols) + x
-            let byteOffset2 = Math.floor(pos2 / 8)
-            let bitOffset2 = pos2 % 8
+            let byteOffset2 = pos2 >> 3 // Math.floor(pos2 / 8)
+            let bitOffset2 = pos2 & 7 // pos2 % 8
 
             let byte2 = this._buf.getNumber(NumberFormat.UInt8LE, byteOffset2)
 
