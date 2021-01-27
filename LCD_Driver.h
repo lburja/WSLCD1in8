@@ -30,9 +30,9 @@ enum LCD_COLOR {
 
 enum DOT_PIXEL{
     DOT_PIXEL_1 = 1,
-    DOT_PIXEL_2,
-    DOT_PIXEL_3,
-    DOT_PIXEL_4
+    DOT_PIXEL_2 = 2,
+    DOT_PIXEL_4 = 4,
+    DOT_PIXEL_8 = 8
 };
 
 enum LINE_STYLE {

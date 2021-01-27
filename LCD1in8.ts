@@ -282,28 +282,12 @@ namespace LCD1IN8{
         _cols: number
 
         _dot: DOT_PIXEL
-        _f: number
 
-        constructor(dot: DOT_PIXEL) {
+        constructor(w: number, h: number, dot: DOT_PIXEL) {
             this._dot = dot
 
-            if (this._dot == DOT_PIXEL.DOT_PIXEL_2) {
-                this._rows = 64
-                this._cols = 40
-                this._f = 2
-            } else if (this._dot == DOT_PIXEL.DOT_PIXEL_3) {
-                this._rows = 42
-                this._cols = 53
-                this._f = 3
-            } else if (this._dot == DOT_PIXEL.DOT_PIXEL_4) {
-                this._rows = 32
-                this._cols = 40
-                this._f = 4
-            } else {
-                this._rows = 128
-                this._cols = 160
-                this._f = 1
-            }
+            this._rows = Math.floor(h / dot)
+            this._cols = Math.floor(w / dot)
 
             let numBytes:number = Math.ceil(this._rows * this._cols / 8.0)
             
@@ -396,33 +380,41 @@ namespace LCD1IN8{
             }
         }
 
-        //% block="draw $this(bitmap) with color $fgColor background $bgColor"
+        //% block="draw $this(bitmap) at x $x y $y with color $fgColor and background $bgColor"
         //% inlineInputMode=inline
         //% group="Bitmap: Display"
+        //% xi.defl = 0
+        //% xi.min=0 xi.max=160
+        //% yi.min=0 yi.max=128
+        //% yi.defl = 0
         //% fgColor.defl=LCD_COLOR.RED
         //% fgColor.min=0 fgColor.max=65535
         //% bgColor.defl=LCD_COLOR.WHITE
         //% bgColor.min=-1 bgColor.max=65535
-        public showBitmapOnLCD(fgColor: number = LCD_COLOR.RED, bgColor: number = LCD_COLOR.WHITE) {
+        public showBitmapOnLCD(xi:number = 0, yi:number = 0, fgColor: number = LCD_COLOR.RED, bgColor: number = LCD_COLOR.WHITE) {
             for (let y = 0; y < this.getRows(); y++) {
                 for(let x = 0; x < this.getCols(); x++){
                     let bit = this.getBit(x, y)
                     if (bit != 0){
-                        DrawPoint((x + 1) * this._f, (y + 1) * this._f, fgColor, this._dot)
+                        DrawPoint( xi + (x + 1) * this._dot, yi + (y + 1) * this._dot, fgColor, this._dot)
                     } else if (bgColor != LCD_COLOR.TRANSPARENT) {
-                        DrawPoint((x + 1) * this._f, (y + 1) * this._f, bgColor, this._dot)
+                        DrawPoint( xi + (x + 1) * this._dot, yi + (y + 1) * this._dot, bgColor, this._dot)
                     }
                 }
             }
         } 
     }
 
-    //% block="create bitmap with pixel size $dot"
+    //% block="create bitmap with width $w heigth $h and pixel size $dot"
+    //% w.defl = 160
+    //% w.min=1 w.max=160
+    //% h.defl = 128
+    //% h.min=1 h.max=128
     //% dot.defl=DOT_PIXEL.DOT_PIXEL_4
     //% group="Bitmap: Create"
     //% blockSetVariable=bitmap
-    export function createBitmap(dot: DOT_PIXEL = DOT_PIXEL.DOT_PIXEL_4): Bitmap {
-        return new Bitmap(dot)
+    export function createBitmap(w: number = 160, h: number = 128, dot: DOT_PIXEL = DOT_PIXEL.DOT_PIXEL_4): Bitmap {
+        return new Bitmap(w, h, dot)
     }
 }
 
