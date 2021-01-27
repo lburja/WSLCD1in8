@@ -363,17 +363,17 @@ namespace LCD1IN8{
             }
         }
 
-        //% block="draw bitmap $this(bitmap) using foreground $fgColor background $bgColor dot size $Dot"
+        //% block="draw bitmap $this(bitmap) using foreground $fgColor background $bgColor"
         //% inlineInputMode=inline
         //% group="Bitmap: Display"
-        public showBitmapOnLCD(fgColor: number, bgColor: number, Dot: DOT_PIXEL) {
+        public showBitmapOnLCD(fgColor: number, bgColor: number) {
             for (let y = 0; y < this.getRows(); y++) {
                 for(let x = 0; x < this.getCols(); x++){
                     let bit = this.getBit(x, y)
                     if (bit != 0){
-                        DrawPoint(x, y, fgColor, Dot)
+                        DrawPoint(x * 2, y * 2, fgColor, DOT_PIXEL.DOT_PIXEL_2)
                     } else {
-                        DrawPoint(x, y, bgColor, Dot)
+                        DrawPoint(x * 2, y * 2, bgColor, DOT_PIXEL.DOT_PIXEL_2)
                     }
                 }
             }
