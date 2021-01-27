@@ -13,7 +13,7 @@ namespace LCD1IN8{
     }
 
     //% blockId=LCD_Init
-    //% block="LCD Init"
+    //% block="LCD init"
     //% shim=LCD1IN8::LCD_Init
     //% weight=200
     export function LCD_Init(): void {
@@ -21,7 +21,7 @@ namespace LCD1IN8{
     }
 
     //% blockId=LCD_Clear
-    //% block="Clear screen"
+    //% block="clear screen"
     //% shim=LCD1IN8::LCD_Clear
     //% weight=195
     export function LCD_Clear(): void {
@@ -29,7 +29,7 @@ namespace LCD1IN8{
     }
 
     //% blockId=LCD_Filling
-    //% block="Filling color %Color"
+    //% block="filling color %Color"
     //% shim=LCD1IN8::LCD_Filling
     //% weight=189
     //% Color.defl=LCD_COLOR.RED
@@ -38,7 +38,7 @@ namespace LCD1IN8{
     }
 
     //% blockId=LCD_Display
-    //% block="Display screen"
+    //% block="display screen"
     //% shim=LCD1IN8::LCD_Display
     //% weight=194
     export function LCD_Display(): void {
@@ -46,7 +46,7 @@ namespace LCD1IN8{
     }
 
     //% blockId=LCD_DisplayWindows
-    //% block="Display window |x1 %Xstart|y1 %Ystart|x2 %Xend|y2 %Yend "
+    //% block="display window |x1 %Xstart|y1 %Ystart|x2 %Xend|y2 %Yend "
     //% shim=LCD1IN8::LCD_DisplayWindows
     //% Xstart.min=1 Xstart.max=160 Ystart.min=1 Ystart.max=128
     //% Xend.min=1 Xend.max=160 Yend.min=1 Yend.max=128
@@ -64,7 +64,7 @@ namespace LCD1IN8{
     }
 
     //% blockId=LCD_SetBL
-    //% block="Set back light level %Lev"
+    //% block="set back light level %Lev"
     //% Lev.min=0 Lev.max=10
     //% shim=LCD1IN8::LCD_SetBL
     //% weight=180
@@ -74,7 +74,7 @@ namespace LCD1IN8{
     }
 
     //% blockId=DrawPoint
-    //% block="Draw point at x %x y %y with color %Color size %Dot"
+    //% block="draw point at x %x y %y with color %Color size %Dot"
     //% x.min=1 x.max=160 y.min=1 y.max=128
     //% Color.min=0 Color.max=65535
     //% shim=LCD1IN8::DrawPoint
@@ -86,7 +86,7 @@ namespace LCD1IN8{
     }
 
     //% blockId=DrawLine
-    //% block="Draw line at x1 %Xstart y1 %Ystart x2 %Xend y2 %Yend with color %Color| width %Line_width| style %Line_Style"
+    //% block="draw line at x1 %Xstart y1 %Ystart x2 %Xend y2 %Yend with color %Color| width %Line_width| style %Line_Style"
     //% Xstart.min=1 Xstart.max=160 Ystart.min=1 Ystart.max=128
     //% Xend.min=1 Xend.max=160 Yend.min=1 Yend.max=128
     //% Color.min=0 Color.max=65535
@@ -136,7 +136,7 @@ namespace LCD1IN8{
 
 
     //% blockId=DrawRectangle
-    //% block="Draw rectangle at x1 %Xstart2 y1 %Ystart2 x2 %Xend2 y2 %Yend2 with color %Color fill %Filled width %Dot_Pixel"
+    //% block="draw rectangle at x1 %Xstart2 y1 %Ystart2 x2 %Xend2 y2 %Yend2 with color %Color fill %Filled width %Dot_Pixel"
     //% Xstart2.min=1 Xstart2.max=160 Ystart2.min=1 Ystart2.max=128
     //% Xend2.min=1 Xend2.max=160 Yend2.min=1 Yend2.max=128
     //% Color.min=0 Color.max=65535
@@ -163,7 +163,7 @@ namespace LCD1IN8{
     }
 
     //% blockId=DrawCircle
-    //% block="Draw circle at x %X_Center y %Y_Center with r %Radius|color %Color|fill %Draw_Fill| width %Dot_Pixel"
+    //% block="draw circle at x %X_Center y %Y_Center with r %Radius|color %Color|fill %Draw_Fill| width %Dot_Pixel"
     //% X_Center.min=1 X_Center.max=160 Y_Center.min=1 Y_Center.max=128
     //% Radius.min=0 Radius.max=160
     //% Color.min=0 Color.max=65535
@@ -228,7 +228,7 @@ namespace LCD1IN8{
     }
 
     //% blockId=DisString
-    //% block="Show string %ch at x %Xchar y %Ychar with color %Color"
+    //% block="show string %ch at x %Xchar y %Ychar with color %Color"
     //% Xchar.min=1 Xchar.max=160 Ychar.min=1 Ychar.max=128
     //% Color.min=0 Color.max=65535
     //% weight=100
@@ -264,7 +264,7 @@ namespace LCD1IN8{
     }
 
     //% blockId=DisNumber
-    //% block="Show number %num at x %Xnum y %Ynum with color %Color"
+    //% block="show number %num at x %Xnum y %Ynum with color %Color"
     //% Xnum.min=1 Xnum.max=160 Ynum.min=1 Ynum.max=128
     //% Color.min=0 Color.max=65535
     //% weight=100
