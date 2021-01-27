@@ -397,7 +397,7 @@ namespace LCD1IN8{
                 for(let x = 0; x < this.getCols(); x++){
                     let bit = this.getBit(x, y)
                     if (bit != 0){
-                        DrawPoint(x * this._f, y * this._f, fgColor, this._dot)
+                        DrawPoint((x + 1) * this._f, (y + 1) * this._f, fgColor, this._dot)
                     }
                 }
             }
