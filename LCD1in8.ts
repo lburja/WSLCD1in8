@@ -396,16 +396,21 @@ namespace LCD1IN8{
             }
         }
 
-        //% block="draw bitmap $this(bitmap) using color $fgColor"
+        //% block="draw $this(bitmap) with color $fgColor background $bgColor"
         //% inlineInputMode=inline
         //% group="Bitmap: Display"
         //% fgColor.defl=LCD_COLOR.RED
-        public showBitmapOnLCD(fgColor: number = LCD_COLOR.RED) {
+        //% fgColor.min=0 fgColor.max=65535
+        //% bgColor.defl=LCD_COLOR.WHITE
+        //% bgColor.min=-1 bgColor.max=65535
+        public showBitmapOnLCD(fgColor: number = LCD_COLOR.RED, bgColor: number = LCD_COLOR.WHITE) {
             for (let y = 0; y < this.getRows(); y++) {
                 for(let x = 0; x < this.getCols(); x++){
                     let bit = this.getBit(x, y)
                     if (bit != 0){
                         DrawPoint((x + 1) * this._f, (y + 1) * this._f, fgColor, this._dot)
+                    } else if (bgColor != LCD_COLOR.TRANSPARENT) {
+                        DrawPoint((x + 1) * this._f, (y + 1) * this._f, bgColor, this._dot)
                     }
                 }
             }

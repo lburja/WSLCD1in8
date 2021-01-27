@@ -16,6 +16,8 @@
     BROWN = 0XBC40,
     BRRED = 0XFC07,
     GRAY = 0X8430,
+
+    TRANSPARENT = -1,
     }
 
 
