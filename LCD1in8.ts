@@ -228,7 +228,7 @@ namespace LCD1IN8{
     }
 
     //% blockId=DisString
-    //% block="show string %ch at x %Xchar y %Ychar with color %Color"
+    //% block="show string $ch at x $Xchar y $Ychar with color $Color"
     //% Xchar.min=1 Xchar.max=160 Ychar.min=1 Ychar.max=128
     //% Color.min=0 Color.max=65535
     //% weight=100
