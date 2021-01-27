@@ -311,6 +311,17 @@ namespace LCD1IN8{
             this._buf.fill(0)
         }
 
+        //% block="fill bitmap $this(bitmap) with $bit"
+        //% bit.min=0 bit.max=1
+        //% bit.defl=0
+        public fill(bit: number) {
+            if (bit == 0) {
+                this._buf.fill(0)
+            } else {
+                this._buf.fill(1)
+            }
+        }
+
         //% block="$this(bitmap) set value at $x $y to $bit"
         //% inlineInputMode=inline
         //% group="Bitmap: Modify"
@@ -318,7 +329,6 @@ namespace LCD1IN8{
         //% y.min=0 y.max=128
         //% bit.min=0 bit.max=1
         //% bit.defl=1
-        //% weight=70
         public setBit(x: number, y:number, bit:number) {
             // circular
             x = x % this._cols
@@ -342,7 +352,6 @@ namespace LCD1IN8{
         //% block="$this(bitmap) get value at $x $y"
         //% inlineInputMode=inline
         //% group="Bitmap: Read"
-        //% weight=85
         public getBit(x: number, y:number): number {
             // circular
             x = x % this._cols
@@ -359,14 +368,12 @@ namespace LCD1IN8{
 
         //% block="$this(bitmap) number of rows"
         //% group="Bitmap: Read"
-        //% weight=80
         public getRows() {
             return this._rows
         }
 
         //% block="$this(bitmap) number of cols"
         //% group="Bitmap: Read"
-        //% weight=75
         public getCols() {
             return this._cols
         }
@@ -374,7 +381,6 @@ namespace LCD1IN8{
         //% block="show bitmap $this(bitmap) on leds"
         //% inlineInputMode=inline
         //% group="Bitmap: Display"
-        //% weight=65
         public showBitmapOnLeds() {
             basic.clearScreen()
 
@@ -391,7 +397,7 @@ namespace LCD1IN8{
         //% block="draw bitmap $this(bitmap) using color $fgColor"
         //% inlineInputMode=inline
         //% group="Bitmap: Display"
-        //% weight=60
+        //% fgColor.defl=LCD_COLOR.RED
         public showBitmapOnLCD(fgColor: number) {
             for (let y = 0; y < this.getRows(); y++) {
                 for(let x = 0; x < this.getCols(); x++){
@@ -408,7 +414,6 @@ namespace LCD1IN8{
     //% dot.defl=DOT_PIXEL.DOT_PIXEL_4
     //% group="Bitmap: Create"
     //% blockSetVariable=bitmap
-    //% weight=90
     export function createBitmap(dot: DOT_PIXEL = DOT_PIXEL.DOT_PIXEL_4): Bitmap {
         return new Bitmap(dot)
     }
