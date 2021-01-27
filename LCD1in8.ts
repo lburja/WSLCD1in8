@@ -413,7 +413,7 @@ namespace LCD1IN8{
     //% dot.defl=DOT_PIXEL.DOT_PIXEL_4
     //% group="Bitmap: Create"
     //% blockSetVariable=bitmap
-    export function createBitmap(w: number = 160, h: number = 128, dot: DOT_PIXEL = DOT_PIXEL.DOT_PIXEL_2): Bitmap {
+    export function createBitmap(w: number = 160, h: number = 128, dot: DOT_PIXEL = DOT_PIXEL.DOT_PIXEL_4): Bitmap {
         return new Bitmap(w, h, dot)
     }
 }
