@@ -275,4 +275,121 @@ namespace LCD1IN8{
         let Ypoint = Ynum;
         DisString(Xnum, Ynum, num + "", Color);
     }
+
+    export class Bitmap {
+        _buf: Buffer
+        _rows:number
+        _cols:number
+
+        constructor(rows:number = 0, cols:number = 0) {
+            let numBytes:number = Math.ceil(rows * cols / 8.0)
+            
+            this._buf = Buffer.create(numBytes) 
+            this._buf.fill(0)
+
+            this._rows = rows
+            this._cols = cols
+        }
+
+        //% block="$this(bitmap) set value at $x $y to $bit"
+        //% inlineInputMode=inline
+        //% group="Bitmap: Modify"
+        //% x.min=0 x.max=160
+        //% y.min=0 y.max=128
+        //% bit.min=0 bit.max=1
+        //% bit.defl=1
+        public setBit(x: number, y:number, bit:number) {
+            if (x < 0 || x >= this._cols || y < 0 || y >= this._rows){
+                return
+            }  
+
+            let pos = (y * this._cols) + x
+            let byteOffset = Math.floor(pos / 8)
+            let bitOffset = pos % 8
+
+            let byte = this._buf.getNumber(NumberFormat.UInt8LE, byteOffset)
+
+            if ( bit == 0) {
+                byte = byte & ~(1 << bitOffset)
+            } else {
+                byte = byte | (1 << bitOffset)
+            }
+
+            this._buf.setNumber(NumberFormat.UInt8LE, byteOffset, byte);
+        }
+
+        //% block="$this(bitmap) get value at $x $y"
+        //% inlineInputMode=inline
+        //% group="Bitmap: Read"
+        public getBit(x: number, y:number): number {
+            if (x < 0 || x >= this._cols || y < 0 || y >= this._rows){
+                return 0
+            }
+
+            let pos2 = (y * this._cols) + x
+            let byteOffset2 = Math.floor(pos2 / 8)
+            let bitOffset2 = pos2 % 8
+
+            let byte2 = this._buf.getNumber(NumberFormat.UInt8LE, byteOffset2)
+
+            return (byte2 >> bitOffset2) & 1
+        }
+
+        //% block="$this(bitmap) number of rows"
+        //% group="Bitmap: Read"
+        public getRows() {
+            return this._rows
+        }
+
+        //% block="$this(bitmap) number of cols"
+        //% group="Bitmap: Read"
+        public getCols() {
+            return this._cols
+        }
+
+        //% block="show bitmap $this(bitmap) on leds"
+        //% inlineInputMode=inline
+        //% group="Bitmap: Display"
+        public showBitmapOnLeds() {
+            basic.clearScreen()
+
+            for (let y = 0; y < 5; y++) {
+                for(let x = 0; x < 5; x++){
+                    let bit = this.getBit(x, y)
+                    if (bit != 0){
+                        led.plot(x, y)
+                    }
+                }
+            }
+        }
+
+        //% block="draw bitmap $this(bitmap) using foreground $fgColor background $bgColor dot size $Dot"
+        //% inlineInputMode=inline
+        //% group="Bitmap: Display"
+        public showBitmapOnLCD(fgColor: number, bgColor: number, Dot: DOT_PIXEL) {
+            for (let y = 0; y < this.getRows(); y++) {
+                for(let x = 0; x < this.getCols(); x++){
+                    let bit = this.getBit(x, y)
+                    if (bit != 0){
+                        DrawPoint(x, y, fgColor, Dot)
+                    } else {
+                        DrawPoint(x, y, bgColor, Dot)
+                    }
+                }
+            }
+        } 
+    }
+
+    //% block="create bitmap with rows = $rows cols = $cols"
+    //% rows.defl=5
+    //% cols.defl=5
+    //% rows.min=1 rows.max=128
+    //% cols.min=1 cols.max=160
+    //% group="Bitmap: Create"
+    //% blockSetVariable=bitmap
+    export function createBitmap(rows:number = 5, cols:number = 5): Bitmap {
+        return new Bitmap(rows, cols)
+    }
 }
+
+

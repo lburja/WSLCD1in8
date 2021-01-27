@@ -1,6 +1,10 @@
 #include "SPI_RAM.h"
 #include "mbed.h"
-#include "MicroBitPin.h"
+//#include "MicroBitPin.h"
+
+//#defines for each edge connector pin
+#define MICROBIT_PIN_P2                     P0_1        //P2 is the right most pad (ANALOG/DIGITAL) used to be P0_1 on green board
+
 
 //SPI
 SPI ram_spi(MOSI, MISO, SCK);

@@ -1,7 +1,17 @@
-#include "MicroBitPin.h"
+//#include "MicroBitPin.h"
 #include "mbed.h"
 #include "LCD_Driver.h"
 #include "SPI_RAM.h"
+#include "MicroBit.h"
+
+#include "pxt.h"
+using namespace pxt;
+
+//#defines for each edge connector pin
+#define MICROBIT_PIN_P1                     P0_2        //P1 is the middle pad (ANALOG/DIGITAL)
+#define MICROBIT_PIN_P8                     P0_18       //PIN 18
+#define MICROBIT_PIN_P12                    P0_20       //PIN 20
+#define MICROBIT_PIN_P16                    P0_16       //PIN 16
 
 //spi
 SPI lcd_spi(MOSI, MISO, SCK);
@@ -21,7 +31,7 @@ PwmOut LCD_BL(MICROBIT_PIN_P1);
 #define LCD_CS_1 LCD_CS = 1
 
 //delay
-#define Driver_Delay_ms(xms) wait_ms(xms)
+#define Driver_Delay_ms(xms) uBit.sleep(xms)
 
 //SPI Ram
 SPIRAM *spiram;
@@ -238,7 +248,7 @@ void LCD_Driver::LCD_Init(void)
 	spi.write(0x00);
 	
 	//back light
-    LCD_BL.period(0.02);
+    LCD_BL.period_us(20);
     LCD_BL.write(1);
 	
     LCD_SPI_Init();
