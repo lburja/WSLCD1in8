@@ -312,9 +312,10 @@ namespace LCD1IN8{
         }
 
         //% block="fill bitmap $this(bitmap) with $bit"
+        //% inlineInputMode=inline
+        //% group="Bitmap: Modify"
         //% bit.min=0 bit.max=1
         //% bit.defl=0
-        //% group="Bitmap: Modify"
         public fill(bit: number) {
             if (bit == 0) {
                 this._buf.fill(0)
